@@ -5,21 +5,21 @@ import { useEffect, useState } from "react";
 import { InviteModal } from "@/components/modals/invite-modal";
 
 export const ModalProvider = () => {
+  
+  const [isMounted, setIsMounted] = useState(false);
 
-const [isMounted,setIsMounted] = useState(false);
-
-useEffect(()=>{
+  useEffect(() => {
     setIsMounted(true);
-},[])
+  }, []);
 
-if(!isMounted){
+  if (!isMounted) {
     return null;
-}
+  }
 
   return (
     <>
       <CreateServerModal />
-      <InviteModal/>
+      <InviteModal />
     </>
   );
 };

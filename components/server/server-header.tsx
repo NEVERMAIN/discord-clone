@@ -18,10 +18,9 @@ import {
   PlusCircle,
   Settings,
   Trash,
-  UserPlus, 
-  Users
+  UserPlus,
+  Users,
 } from "lucide-react";
-
 
 interface ServerHeaderProps {
   server: ServerWithMembersWithProfiles;
@@ -29,9 +28,8 @@ interface ServerHeaderProps {
 }
 
 const ServerHeader = ({ server, role }: ServerHeaderProps) => {
-  
-  const {onOpen} = useModal();
-  
+  const { onOpen } = useModal();
+
   const isAdmin = role === MemberRole.ADMIN;
   const isModerrator = isAdmin || role === MemberRole.MODERATOR;
 
@@ -54,7 +52,7 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
       >
         {isModerrator && (
           <DropdownMenuItem
-            onClick={() => onOpen("invite",{server})}
+            onClick={() => onOpen("invite", { server })}
             className="text-indigo-600 dark:text-indigo-400
                 px-3 py-2 text-sm cursor-pointer"
           >
@@ -63,44 +61,32 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
           </DropdownMenuItem>
         )}
         {isModerrator && (
-          <DropdownMenuItem
-            className="px-3 py-2 text-sm cursor-pointer"
-          >
+          <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">
             Server Setting
             <Settings className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
         {isModerrator && (
-          <DropdownMenuItem
-            className="px-3 py-2 text-sm cursor-pointer"
-          >
+          <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">
             Manage Memeber
             <Users className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
         {isModerrator && (
-          <DropdownMenuItem
-            className="px-3 py-2 text-sm cursor-pointer"
-          >
+          <DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">
             Create Channel
             <PlusCircle className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
-        {isModerrator && (
-          <DropdownMenuSeparator/>
-        )}
+        {isModerrator && <DropdownMenuSeparator />}
         {isAdmin && (
-          <DropdownMenuItem
-            className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
-          >
+          <DropdownMenuItem className="text-rose-500 px-3 py-2 text-sm cursor-pointer">
             Delete Server
             <Trash className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
         {!isAdmin && (
-          <DropdownMenuItem
-            className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
-          >
+          <DropdownMenuItem className="text-rose-500 px-3 py-2 text-sm cursor-pointer">
             Lever Server
             <LogOut className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>

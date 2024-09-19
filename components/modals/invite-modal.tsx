@@ -18,9 +18,11 @@ import axios from "axios";
 
 
 export const InviteModal = () => {
+
   const {onOpen,isOpen,onClose,type,data}  = useModal();
+  /** 获取当前的 ip+port */
   const origin =  useOrigin();
-  
+  /** 满足打开页面开关并且属于是 invite 事件,则显示 invite-modal */
   const isModalOpen = isOpen && type === "invite";
   const {server} = data;
 
@@ -45,7 +47,7 @@ export const InviteModal = () => {
     try{
       setIsLoading(true);
       const resposne = await axios.patch(`/api/servers/${server?.id}/invite-code`);
-
+      //  修改全局存储的值,驱动 invite-modal 刷新页面 
       onOpen("invite",{server: resposne.data})
 
     }catch(error){
