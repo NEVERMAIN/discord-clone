@@ -18,13 +18,11 @@ const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
 
   const onClick = () => {
     router.push(`/servers/${id}`);
-  }
+  };
 
   return (
     <ActionTooltip side="right" align="center" lable={name}>
-      <button 
-      onClick={onClick} 
-      className="group relative flex items-center">
+      <div onClick={onClick} className="group relative flex items-center">
         <div
           className={cn(
             "absolute left-0 bg-primary rounded-r-full translate-all w-[4px]",
@@ -42,7 +40,7 @@ const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
         >
           <Image fill src={imageUrl} alt="Channel" />
         </div>
-      </button>
+      </div>
     </ActionTooltip>
   );
 };

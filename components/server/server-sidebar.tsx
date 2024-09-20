@@ -41,6 +41,7 @@ export const ServerSidebar = async ({
         }
     })
 
+
     if(!server){
         return redirect("/");
     }
