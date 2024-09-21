@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { InviteModal } from "@/components/modals/invite-modal";
 import { EditServerModal } from "@/components/modals/edit-server-modal";
 import { MembersModal } from "@/components/modals/member-modal";
+import { CreateChannelModal } from "../modals/create-channel-modal";
 
 export const ModalProvider = () => {
   
@@ -25,6 +26,7 @@ export const ModalProvider = () => {
       <InviteModal />
       <EditServerModal/>
       <MembersModal/>
+      <CreateChannelModal/>
     </>
   );
 };
