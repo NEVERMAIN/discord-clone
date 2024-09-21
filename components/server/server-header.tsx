@@ -28,7 +28,6 @@ interface ServerHeaderProps {
 }
 
 const ServerHeader = ({ server, role }: ServerHeaderProps) => {
-  
   const { onOpen } = useModal();
 
   const isAdmin = role === MemberRole.ADMIN;
@@ -81,23 +80,30 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
         )}
         {isModerrator && (
           <DropdownMenuItem
-          onClick={()=> onOpen("createChannel",{server})}
-          className="px-3 py-2 text-sm cursor-pointer">
+            onClick={() => onOpen("createChannel", { server })}
+            className="px-3 py-2 text-sm cursor-pointer"
+          >
             Create Channel
             <PlusCircle className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
         {isModerrator && <DropdownMenuSeparator />}
         {isAdmin && (
-          <DropdownMenuItem className="text-rose-500 px-3 py-2 text-sm cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => onOpen("deleteServer", { server })}
+            className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
+          >
             Delete Server
             <Trash className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
         {!isAdmin && (
           <DropdownMenuItem
-            onClick={()=>{onOpen("leaveSever",{server})}}
-          className="text-rose-500 px-3 py-2 text-sm cursor-pointer">
+            onClick={() => {
+              onOpen("leaveSever", { server });
+            }}
+            className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
+          >
             Lever Server
             <LogOut className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
