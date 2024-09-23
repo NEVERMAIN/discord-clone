@@ -54,14 +54,13 @@ const formSchema = z.object({
   type: z.nativeEnum(ChannelType),
 });
 
-export const CreateChannelModal = () => {
+export const EeditChannelModal = () => {
 
   const { isOpen, onClose, type,data } = useModal();
   const router = useRouter();
-  const params = useParams();
 
-  const isModalOpen = isOpen && type === "createChannel";
-  const { channelType } = data;
+  const isModalOpen = isOpen && type === "editChannel";
+  const { server,channel } = data;
 
   // 定义表单
   const form = useForm<z.infer<typeof formSchema>>({
@@ -72,13 +71,15 @@ export const CreateChannelModal = () => {
     },
   });
 
+  /**
+   * 页面一渲染就设置值
+   */
   useEffect(()=>{
-    if(channelType){
-      form.setValue("type",channelType);
-    }else{
-      form.setValue("type",ChannelType.TEXT);
+    if(channel){
+      form.setValue("name",channel.name);
+      form.setValue("type",channel.type);
     }
-  },[channelType,form]);
+  },[channel,form]);
 
 
   // 表单加载状态
@@ -90,13 +91,13 @@ export const CreateChannelModal = () => {
     try {
 
       const url = qs.stringifyUrl({
-        url: `/api/channels`,
+        url: `/api/channels/${channel?.id}`,
         query: {
-          serverId: params?.serverId,
+          serverId: server?.id,
         }
       })
       
-      await axios.post(url, values);
+      await axios.patch(url, values);
       form.reset();
       router.refresh();
       // close the form
@@ -116,7 +117,7 @@ export const CreateChannelModal = () => {
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            Create your Channel
+            Edit your Channel
           </DialogTitle>
         </DialogHeader>
         <Form {...form}>
@@ -179,7 +180,7 @@ export const CreateChannelModal = () => {
             </div>
             <DialogFooter className="bg-gray-100 px-6 py-4">
               <Button variant="primary" disabled={isLoading}>
-                create
+                Save
               </Button>
             </DialogFooter>
           </form>

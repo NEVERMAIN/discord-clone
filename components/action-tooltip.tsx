@@ -9,14 +9,14 @@ import {
 import React from "react";
 
 interface ActionTooltipProps {
-  lable: string;
+  label: string;
   children: React.ReactNode;
   side?: "top" | "right" | "bottom" | "left";
   align?: "start" | "center" | "end";
 }
 
-const ActionTooltip = ({
-  lable,
+export const ActionTooltip = ({
+  label,
   children,
   side,
   align,
@@ -27,7 +27,7 @@ const ActionTooltip = ({
         <TooltipTrigger>{children}</TooltipTrigger>
         <TooltipContent side={side} align={align}>
           <p className="font-semibold text-sm capitalize">
-            {lable.toLowerCase()}
+            {label.toLowerCase()}
           </p>
         </TooltipContent>
       </Tooltip>
